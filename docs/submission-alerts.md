@@ -73,23 +73,31 @@ Supabase → **Project Settings** → **API** → 找到 **`service_role`** 那�
 
 ---
 
-## 第 3 步：填 GitHub Secrets（5 分钟）
+## 第 3 步：填 GitHub Secrets（2 分钟）
 
 打开 <https://github.com/yangran12/YRpublish/settings/secrets/actions>
 
-点 **New repository secret**，一个一个加：
+点 **New repository secret**，**只需要加 2 个**：
 
 | Name | Secret 值 |
 |---|---|
-| `SUPABASE_URL` | `https://eaueuxvizikfepbfponj.supabase.co` |
 | `SUPABASE_SERVICE_KEY` | 第 2 步复制的 `service_role` key |
-| `MAIL_USER` | `18755246110@163.com` |
 | `MAIL_PASS` | 你的 163 **授权码**（不是登录密码） |
-| `MAIL_TO` | `18755246110@163.com` |
-| `MAIL_HOST` | `smtp.163.com` |
-| `SITE_URL` | `https://yangran12.github.io/YRpublish` |
 
-`MAIL_PORT` 不用填，默认 465。
+**其余的值不用填** —— 它们本来就已经公开在网站上（`assets/js/config.js` 和页脚里都有），
+直接写在 `.github/workflows/submission-alerts.yml` 里了。
+
+要改的话（比如换邮箱）**直接编辑那个 yml 文件**，改这几行：
+
+```yaml
+SUPABASE_URL: "https://eaueuxvizikfepbfponj.supabase.co"
+MAIL_HOST:    "smtp.163.com"
+MAIL_USER:    "18755246110@163.com"
+MAIL_TO:      "18755246110@163.com"
+SITE_URL:     "https://yangran12.github.io/YRpublish"
+```
+
+改完 commit + push 即可生效。
 
 ---
 
@@ -136,15 +144,24 @@ Supabase → **Project Settings** → **API** → 找到 **`service_role`** 那�
 
 **这是最可能遇到的问题。** 163 对境外 IP 管得严，而 GitHub 的服务器在境外。
 
-换 QQ 邮箱最省事 —— **只改 3 个 Secret，代码一个字不动**：
+换 QQ 邮箱最省事，**改两个地方就行**：
 
-| Secret | 改成 |
-|---|---|
-| `MAIL_HOST` | `smtp.qq.com` |
-| `MAIL_USER` | 你的QQ号@qq.com |
-| `MAIL_PASS` | QQ邮箱的授权码（设置 → 账户 → POP3/SMTP → 生成授权码） |
+**① 改 `.github/workflows/submission-alerts.yml` 里的两行：**
 
-**`MAIL_TO` 保持 `18755246110@163.com` 不变** —— 提醒照样发到你 163。
+```yaml
+MAIL_HOST:    "smtp.qq.com"
+MAIL_USER:    "你的QQ号@qq.com"
+```
+
+存盘 → `git add . && git commit -m "Switch to QQ mail" && git push`
+
+**② 改 GitHub 的 `MAIL_PASS` Secret：**
+
+换成 QQ 邮箱的授权码（QQ邮箱网页版 → 设置 → 账户 → POP3/SMTP服务 → 生成授权码）
+
+**`MAIL_TO` 保持不变** —— 提醒照样发到你 163。
+
+> 别忘了 QQ 邮箱也要先去设置里**开启 SMTP 服务**，否则拿不到授权码。
 
 ### ⚠️ 60 天限制（重要）
 
