@@ -20,8 +20,7 @@ window.TDF_CONFIG = {
   contactEmail: "18755246110@163.com",
 
   // Your GitHub organisation/repo, used for the submission queue and review archive.
-  // Leave as-is until you create the repo, then fill in.
-  githubRepo: "https://github.com/your-org/tdf",
+  githubRepo: "https://github.com/yangran12/YRpublish",
 
   // Zenodo community that collects accepted papers. Create it at zenodo.org/communities
   zenodoCommunity: "https://zenodo.org/communities/tdf",
