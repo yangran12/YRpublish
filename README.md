@@ -1,5 +1,8 @@
 # Transactions on Decarbonization Frontiers (TDF)
 
+> 📖 **如果你是主编，先看 [HANDBOOK.md](HANDBOOK.md)** —— 那是写给你自己的操作手册：
+> 日常该干什么、审稿流程怎么走、邮件模板、出了问题怎么排查、哪些红线不能碰。
+
 一个学生运营的**开放同行评审平台**网站。电动车、可再生能源、智慧电网、能源 AI 方向。
 
 纯静态站点，**零成本**，可直接部署到 GitHub Pages / Cloudflare Pages。
