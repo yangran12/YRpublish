@@ -77,7 +77,9 @@ python tools\e2e_check.py          # 端到端：注册 → 投稿 → 读取
 
 python tools\make_word_template.py # 重新生成 Word 模板
 python tools\make_qr.py            # 重新生成二维码
+python tools\make_header_art.py    # 重新生成海报头图（矢量）
 python tools\render_poster.py      # 海报 HTML → PNG + PDF
+python tools\check_qr.py           # 解码海报上的二维码，确认扫出来是对的
 ```
 
 > 跑需要联网的脚本前先设代理：`$env:HTTPS_PROXY = "http://127.0.0.1:7890"`
