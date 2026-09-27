@@ -22,6 +22,7 @@
     "nav.home":      { en: "Home",            zh: "首页" },
     "nav.papers":    { en: "Papers",          zh: "论文" },
     "nav.submit":    { en: "Submit",          zh: "投稿" },
+    "nav.templates": { en: "Templates",       zh: "模板" },
     "nav.review":    { en: "Review process",  zh: "评审流程" },
     "nav.about":     { en: "About",           zh: "关于" },
     "nav.signin":    { en: "Sign in",         zh: "登录" },
@@ -46,8 +47,8 @@
 
     /* ---------------------------------------------------------- home page */
     "home.eyebrow": { en: "Open access · No author charges", zh: "开放获取 · 不向作者收费" },
-    "home.title":   { en: "A student-run open review platform for the decarbonization transition",
-                      zh: "一个由学生运营的脱碳转型开放评审平台" },
+    "home.title":   { en: "Open peer review for the decarbonization transition",
+                      zh: "面向脱碳转型的开放同行评审" },
     "home.lede":    { en: "TDF organises open peer review for research on electric mobility, renewable energy, smart grids and their intersection with artificial intelligence. Accepted work is archived on Zenodo with a DOI; review records are published openly alongside it.",
                       zh: "TDF 为电动汽车、可再生能源、智慧电网及其与人工智能交叉方向的研究组织开放同行评审。通过评审的论文将存档于 Zenodo 并获得 DOI，评审记录同时公开。" },
 
@@ -56,7 +57,7 @@
     "home.meta.model":   { en: "Model",     zh: "模式" },
     "home.meta.model_v": { en: "Diamond open access — no fees, either side", zh: "钻石开放获取 —— 双向免费" },
     "home.meta.status":  { en: "Status",    zh: "状态" },
-    "home.meta.status_v":{ en: "Student-run, accepting submissions", zh: "学生运营，接受投稿中" },
+    "home.meta.status_v":{ en: "Accepting submissions", zh: "正在接受投稿" },
 
     "home.how.heading": { en: "How it works", zh: "运作方式" },
     "home.how.lede":    { en: "Four steps, no publication charges, and a public record at every stage.",
@@ -189,15 +190,16 @@
 
     /* --------------------------------------------------------- about page */
     "about.title": { en: "About TDF", zh: "关于 TDF" },
-    "about.lede":  { en: "TDF is a student-run open review platform based at Nanjing Normal University. It is not a registered journal and does not claim to be one.",
-                     zh: "TDF 是依托南京师范大学的学生运营开放评审平台。它不是注册期刊，也不冒充期刊。" },
+    "about.lede":  { en: "TDF is an open review platform run from Nanjing Normal University. It is not a registered journal and does not claim to be one.",
+                     zh: "TDF 是依托南京师范大学的开放评审平台。它不是注册期刊，也不冒充期刊。" },
 
     "about.what.heading": { en: "What TDF is, and is not", zh: "TDF 是什么，不是什么" },
     "about.is.heading":   { en: "It is",   zh: "它是" },
     "about.is.1": { en: "An organising body for open peer review.", zh: "一个组织开放同行评审的机构。" },
     "about.is.2": { en: "A public archive of review records.",      zh: "一个公开的评审记录存档。" },
     "about.is.3": { en: "A citable index of accepted preprints.",   zh: "一份可引用的收录预印本索引。" },
-    "about.is.4": { en: "Run by students, advised by faculty.",     zh: "由学生运营，教师指导。" },
+    "about.is.4": { en: "An editorial team at Nanjing Normal University, advised by faculty.",
+                    zh: "南京师范大学编辑团队运营，教师担任学术顾问。" },
     "about.isnot.heading": { en: "It is not", zh: "它不是" },
     "about.isnot.1": { en: "A journal with an ISSN or CN number.",  zh: "不是拥有 ISSN 或 CN 号的期刊。" },
     "about.isnot.2": { en: "Indexed in Web of Science or Scopus.",  zh: "未被 Web of Science 或 Scopus 收录。" },
@@ -284,16 +286,54 @@
     "status.accepted":  { en: "Accepted",       zh: "已录用" },
     "status.rejected":  { en: "Declined",       zh: "已退稿" },
 
+    /* ------------------------------------------------------- templates page */
+    "tpl.title": { en: "Manuscript templates", zh: "论文模板" },
+    "tpl.lede":  { en: "Use whichever format you already work in. All three produce the same PDF — we do not require a particular one.",
+                   zh: "用你顺手的格式即可。三种模板最终产出同样的 PDF，我们不强制某一种。" },
+
+    "tpl.word.t":  { en: "Word (.docx)", zh: "Word（.docx）" },
+    "tpl.word.d":  { en: "The usual choice. Open it, type over the placeholder text, export to PDF. WPS opens it too.",
+                     zh: "最常用。打开后直接替换示例文字，导出 PDF 即可。WPS 也能打开。" },
+
+    "tpl.latex.t": { en: "LaTeX (.tex)", zh: "LaTeX（.tex）" },
+    "tpl.latex.d": { en: "For those already working in LaTeX. Compile with pdfLaTeX; the file explains how to switch on Chinese support.",
+                     zh: "给已经在用 LaTeX 的同学。用 pdfLaTeX 编译；文件里写明了怎么开中文支持。" },
+
+    "tpl.typst.t": { en: "Typst (.typ)", zh: "Typst（.typ）" },
+    "tpl.typst.d": { en: "Nothing to install — open typst.app in a browser, paste the file, export a PDF. The best middle ground if LaTeX feels heavy.",
+                     zh: "无需安装 —— 浏览器打开 typst.app，把文件粘贴进去就能导出 PDF。觉得 LaTeX 太重的话，这是最好的折中。" },
+
+    "tpl.download": { en: "Download", zh: "下载" },
+
+    "tpl.check.heading": { en: "Before you submit", zh: "投稿前检查" },
+    "tpl.check.1": { en: "Title, all authors and all affiliations are complete and in the right order.",
+                     zh: "标题、全部作者、全部单位齐全，顺序正确。" },
+    "tpl.check.2": { en: "Abstract is 150–250 words, with 3–6 keywords.",
+                     zh: "摘要 150–250 词，关键词 3–6 个。" },
+    "tpl.check.3": { en: "Every figure and table is numbered, captioned, and referred to in the text.",
+                     zh: "每张图表都有编号和标题，且正文中引用到了。" },
+    "tpl.check.4": { en: "References are complete and in a consistent style.",
+                     zh: "参考文献完整、格式统一。" },
+    "tpl.check.5": { en: "The work is not under consideration elsewhere.",
+                     zh: "本文未在其他刊物审稿中。" },
+    "tpl.check.6": { en: "All authors have agreed to submission and to open review.",
+                     zh: "全部作者同意投稿并同意公开评审。" },
+
+    "tpl.files.title": { en: "What to send", zh: "要交什么" },
+    "tpl.files.body":  { en: "Send the PDF. Keep the source file (the .docx or .tex) — you will need it if the paper comes back for revision.",
+                         zh: "提交 PDF。源文件（.docx 或 .tex）自己留着 —— 论文退修时还要用。" },
+    "tpl.cta":         { en: "Go to the submission form", zh: "前往投稿表单" },
+
     /* ------------------------------------------------------------ footer */
-    "footer.about":   { en: "TDF is a student-run open review platform. It is not a registered journal and makes no claim to be one. No fees are charged to authors or readers.",
-                        zh: "TDF 是由学生运营的开放评审平台，不是注册期刊，也不作此声称。不向作者或读者收取任何费用。" },
+    "footer.about":   { en: "TDF is an open review platform. It is not a registered journal and makes no claim to be one. No fees are charged to authors or readers.",
+                        zh: "TDF 是开放评审平台，不是注册期刊，也不作此声称。不向作者或读者收取任何费用。" },
     "footer.nav":     { en: "Navigate",  zh: "导航" },
     "footer.legal":   { en: "Policies",  zh: "规范" },
     "footer.ethics":  { en: "Publication ethics", zh: "出版伦理" },
     "footer.license": { en: "Licensing",  zh: "许可协议" },
     "footer.licenseText": { en: "Papers are published under CC BY 4.0 unless stated otherwise.",
                             zh: "除另有说明外，论文采用 CC BY 4.0 许可协议。" },
-    "footer.rights":  { en: "Student-run editorial office", zh: "学生编辑部" },
+    "footer.rights":  { en: "Editorial office", zh: "编辑部" },
   };
 
   /* ------------------------------------------------------------- engine -- */

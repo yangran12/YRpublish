@@ -23,6 +23,7 @@
     { id: "index",   key: "nav.home",     href: "index.html" },
     { id: "papers",  key: "nav.papers",   href: "papers.html" },
     { id: "submit",  key: "nav.submit",   href: "submit.html" },
+    { id: "templates", key: "nav.templates", href: "templates.html" },
     { id: "review",  key: "nav.review",   href: "review.html" },
     { id: "about",   key: "nav.about",    href: "about.html" },
   ];

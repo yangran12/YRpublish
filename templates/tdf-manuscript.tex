@@ -1,0 +1,137 @@
+% ============================================================================
+%  Transactions on Decarbonization Frontiers (TDF)
+%  Manuscript template — LaTeX
+% ----------------------------------------------------------------------------
+%  Compile with pdfLaTeX.
+%  If you write in Chinese, uncomment the two ctex lines below and compile
+%  with XeLaTeX instead.
+%
+%  Submit a PDF at:  https://yangran12.github.io/YRpublish/submit.html
+%  Keep this source file — you will need it again if the paper is sent back
+%  for revision.
+%
+%  Before you submit, check:
+%    [ ] Title, all authors, all affiliations — complete and correctly ordered
+%    [ ] Abstract is 150-250 words
+%    [ ] 3-6 keywords
+%    [ ] Every figure and table is numbered, captioned and referred to in the text
+%    [ ] References are complete and in a consistent style
+%    [ ] The work is not under consideration elsewhere
+%    [ ] All authors have agreed to submission and to open review
+% ============================================================================
+
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+% ---- Chinese support: uncomment these, then compile with XeLaTeX ----------
+% \usepackage{ctex}
+% \setCJKmainfont{SimSun}
+
+\title{\bfseries Your Manuscript Title Goes Here}
+
+\author{%
+  First Author\textsuperscript{1},
+  Second Author\textsuperscript{1},
+  Third Author\textsuperscript{2}
+  \\[6pt]
+  \small\textsuperscript{1}\,School of Electrical and Automation Engineering,
+  Nanjing Normal University, Nanjing 210023, China
+  \\[2pt]
+  \small\textsuperscript{2}\,Department, Institution, City, Country
+  \\[6pt]
+  \small Corresponding author: \href{mailto:you@example.com}{you@example.com}
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% ------------------------------------------------------------------ abstract
+\begin{abstract}
+\noindent
+Write your abstract here, 150 to 250 words. State the problem, the method, the
+main quantitative result, and why it matters. Avoid citations, undefined
+abbreviations and forward references to figures.
+\end{abstract}
+
+\noindent\textbf{Keywords:} electric vehicles; smart grid; low-carbon dispatch
+
+% ----------------------------------------------------------------- sections
+\section{Introduction}
+
+Explain the problem and why it matters. Say what has been done before and what
+is still missing. End with a short statement of what this paper contributes ---
+two or three sentences is enough, no more.
+
+\section{Method}
+
+Describe the method in enough detail that a reader could reproduce it without
+contacting you. Define every symbol the first time it appears. Number equations
+that you refer to later.
+
+\begin{equation}
+  \min_{P} \sum_{t=1}^{T} \left( c_t^{\mathrm{grid}} P_t^{\mathrm{grid}}
+  + c^{\mathrm{deg}} \lvert P_t^{\mathrm{ess}} \rvert \right)
+  \label{eq:objective}
+\end{equation}
+
+\section{Case study}
+
+Say what system you tested on, where the data came from, and what you assumed.
+If you used a public dataset, cite it. If you built the model yourself, say so.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Headline results. Replace with your own numbers.}
+  \label{tab:results}
+  \begin{tabular}{lrr}
+    \toprule
+    Scenario & Cost (CNY) & Emissions (tCO\textsubscript{2}) \\
+    \midrule
+    Baseline            & 100\,000 & 42.1 \\
+    With EV scheduling  &  91\,400 & 36.8 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Refer to the table in the text as Table~\ref{tab:results}, and to the equation
+as Eq.~\eqref{eq:objective}. Every float needs a reference like this.
+
+\section{Discussion}
+
+State the limitations honestly. What would change your conclusion? What did you
+not test? A reviewer will ask, so answer it first.
+
+\section{Conclusion}
+
+Two or three paragraphs at most. What did you show, and what follows from it.
+Do not introduce new results here.
+
+\section*{Acknowledgements}
+Optional. Funding sources, data providers, people who helped but are not authors.
+
+% --------------------------------------------------------------- references
+% Delete this block and use BibTeX if you prefer (\bibliography{yourfile}).
+\begin{thebibliography}{9}
+
+\bibitem{ref1}
+A.~Author and B.~Author, ``Title of the cited paper,''
+\emph{Journal Name}, vol.~12, no.~3, pp.~45--67, 2026.
+
+\bibitem{ref2}
+C.~Author, \emph{Title of the Book}. City: Publisher, 2025, ch.~4.
+
+\bibitem{ref3}
+D.~Author, ``Title of the conference paper,'' in \emph{Proc. Conference Name},
+2026, pp.~1--6.
+
+\end{thebibliography}
+
+\end{document}

@@ -16,7 +16,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 PAGES = [
-    "index.html", "papers.html", "submit.html",
+    "index.html", "papers.html", "submit.html", "templates.html",
     "review.html", "about.html", "login.html", "dashboard.html",
 ]
 SHOTS = ROOT / "shots"

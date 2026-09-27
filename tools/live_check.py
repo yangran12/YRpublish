@@ -13,7 +13,7 @@ import os
 import sys
 
 DEFAULT_BASE = "https://yangran12.github.io/YRpublish/"
-PAGES = ["index.html", "papers.html", "submit.html",
+PAGES = ["index.html", "papers.html", "submit.html", "templates.html",
          "review.html", "about.html", "login.html", "dashboard.html"]
 
 
