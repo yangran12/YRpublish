@@ -38,8 +38,9 @@ window.TDF_CONFIG = {
        4. Run the SQL in docs/supabase-setup.md in the SQL editor
      --------------------------------------------------------------------- */
 
-  supabaseUrl:     "",   // e.g. "https://abcdefgh.supabase.co"
-  supabaseAnonKey: "",   // e.g. "eyJhbGciOiJIUzI1NiIsInR5cCI6..."
+  // NOTE: the project root only — supabase-js appends /auth/v1 and /rest/v1 itself.
+  supabaseUrl:     "https://eaueuxvizikfepbfponj.supabase.co",   // e.g. "https://abcdefgh.supabase.co"
+  supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVhdWV1eHZpemlrZmVwYmZwb25qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0ODUxMDYsImV4cCI6MjEwNjA2MTEwNn0.D2bqjMsI7idKusWO7zKZHoWO6w5cfcd8_4la3K2tgg0",   // e.g. "eyJhbGciOiJIUzI1NiIsInR5cCI6..."
 
   /* ---------------------------------------------------------------------
      3. Editorial defaults
