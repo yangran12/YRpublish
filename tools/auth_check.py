@@ -55,6 +55,16 @@ def main():
             problems.append("nav shows only one account link — Supabase may not be wired up")
             print("  -> accounts DISABLED or SDK failed to load")
 
+        # `.nav a` is display:block, so the wrapper must be a flex row or the
+        # links stack. Catch that by comparing their vertical offsets.
+        tops = page.eval_on_selector_all(
+            "#nav-auth a", "els => els.map(e => Math.round(e.getBoundingClientRect().top))")
+        if len(tops) >= 2:
+            spread = max(tops) - min(tops)
+            print(f"nav link baselines: {tops}  (spread {spread}px)")
+            if spread > 4:
+                problems.append(f"nav account links are stacked, not inline (spread {spread}px)")
+
         print(f"console errors    : {errors or 'none'}")
         if errors:
             problems.append(f"console errors on index: {errors}")

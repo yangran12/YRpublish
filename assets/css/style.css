@@ -216,6 +216,12 @@ p { margin: 0 0 1.05em; }
 
 .nav-spacer { flex: 1 1 auto; }
 
+/* The account links must sit side by side. `.nav a` is display:block, so the
+   wrapper has to be a flex row — otherwise the second link wraps to its own
+   line as soon as an account is signed in and "Sign out" appears next to
+   "My submissions". */
+#nav-auth { display: flex; align-items: center; }
+
 .lang-toggle {
   border: 1px solid var(--rule-strong);
   background: var(--bg);
