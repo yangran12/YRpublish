@@ -78,6 +78,25 @@ def main():
                     print(f"      screenshot failed: {str(exc)[:80]}")
                 page.close()
 
+            # --- config-driven content actually got filled in ---------------
+            page = ctx.new_page()
+            page.goto(base + "about.html", wait_until="load")
+            page.wait_for_timeout(1200)
+            orcid = page.eval_on_selector(
+                "a[data-orcid]",
+                "el => ({href: el.getAttribute('href'), text: el.textContent.trim()})",
+            )
+            editor = page.inner_text("[data-cfg='editorName']").strip()
+            print(f"\nORCID link   : {orcid['text']}  ->  {orcid['href']}")
+            print(f"Editor name  : {editor}")
+            if "orcid.org/" not in (orcid["href"] or ""):
+                print("      !! ORCID href was not filled in")
+                total += 1
+            if not editor:
+                print("      !! editor name was not filled in")
+                total += 1
+            page.close()
+
             browser.close()
     finally:
         httpd.shutdown()

@@ -19,6 +19,11 @@ window.TDF_CONFIG = {
   // spambots. If it is tied to a phone number, consider a dedicated address.
   contactEmail: "18755246110@163.com",
 
+  // The founding editor, shown on the about page and in the footer.
+  // An ORCID iD is a persistent researcher identifier — https://orcid.org
+  editorName:  "Ran Yang",
+  editorOrcid: "0009-0002-4895-7752",
+
   // Your GitHub organisation/repo, used for the submission queue and review archive.
   githubRepo: "https://github.com/yangran12/YRpublish",
 

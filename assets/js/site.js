@@ -72,6 +72,7 @@
         window.I18N.toggle();
         renderHeader();   // button label flips with the language
         renderFooter();
+        applyConfig();    // re-fill config-driven nodes the fresh markup just created
         if (window.TDF_AUTH && window.TDF_AUTH.renderNav) { window.TDF_AUTH.renderNav(); }
       });
     }
@@ -115,6 +116,8 @@
           '<div class="footer-bottom">' +
             "<span>" +
               (mail ? '<a href="mailto:' + mail + '">' + mail + "</a>" : "") +
+              (mail && CFG.editorOrcid ? " &middot; " : "") +
+              (CFG.editorOrcid ? '<a data-orcid href="#"></a>' : "") +
             "</span>" +
             '<span data-i18n="footer.rights">' + t("footer.rights") + "</span>" +
           "</div>" +
@@ -136,6 +139,16 @@
       // so one attribute drives both mail links and plain URLs.
       var existing = el.getAttribute("href") || "";
       el.setAttribute("href", /^mailto:/i.test(existing) ? "mailto:" + val : val);
+    });
+
+    // ORCID links: <a data-orcid></a> gets both the href and the visible iD,
+    // so the identifier only ever has to be written down in one place.
+    document.querySelectorAll("[data-orcid]").forEach(function (el) {
+      var id = CFG.editorOrcid;
+      if (!id) { el.hidden = true; return; }
+      el.setAttribute("href", "https://orcid.org/" + id);
+      el.setAttribute("rel", "noopener");
+      el.textContent = "ORCID " + id;
     });
   }
 
