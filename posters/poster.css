@@ -35,10 +35,19 @@ body {
 
 /* ------------------------------------------------------------- header -- */
 .band {
-  background: var(--green);
+  background-color: var(--green);
   color: #ffffff;
   padding: 62px 78px 54px;
   position: relative;
+}
+
+/* Abstract grid motif behind the title. Switch it off by removing the
+   "has-art" class from <body>; the flat green remains either way. */
+body.has-art .band {
+  background-image: url("header-art.svg");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: cover;
 }
 .band::before {
   content: "";
