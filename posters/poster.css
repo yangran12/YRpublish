@@ -1,0 +1,188 @@
+/* ==========================================================================
+   TDF poster stylesheet — shared by every poster variant.
+   A4 portrait at 1240x1754 CSS px; render at deviceScaleFactor 2 for 2480x3508.
+   ========================================================================== */
+
+@page { size: A4 portrait; margin: 0; }
+
+:root {
+  --green:      #14532d;
+  --green-deep: #0e3a20;
+  --green-soft: #ebf2ed;
+  --green-rule: #cfe0d5;
+  --ink:        #16181d;
+  --ink-soft:   #565c68;
+  --ink-faint:  #8b919c;
+  --rule:       #e3e5e9;
+
+  --sans:  "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB",
+           "Segoe UI", Roboto, sans-serif;
+  --serif: Georgia, "Times New Roman", "Songti SC", "SimSun", serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { background: #ffffff; }
+
+body {
+  width: 1240px;
+  font-family: var(--sans);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.poster { width: 1240px; height: 1754px; display: flex; flex-direction: column; }
+
+/* ------------------------------------------------------------- header -- */
+.band {
+  background: var(--green);
+  color: #ffffff;
+  padding: 62px 78px 54px;
+  position: relative;
+}
+.band::before {
+  content: "";
+  position: absolute; inset: 0 0 auto 0; height: 9px;
+  background: #2f7d4f;
+}
+
+.band h1 {
+  font-family: var(--serif);
+  font-size: 60px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+}
+
+.zh-title {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #ffffff;
+  padding-bottom: 22px;
+  margin-bottom: 22px;
+  border-bottom: 2px solid rgba(255,255,255,0.28);
+  display: inline-block;
+}
+
+.band .sub {
+  font-size: 21px;
+  color: rgba(255,255,255,0.82);
+  letter-spacing: 0.02em;
+}
+
+/* --------------------------------------------------------------- body -- */
+main { padding: 56px 78px 0; flex: 1 1 auto; }
+
+.kicker {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: var(--green);
+  margin-bottom: 18px;
+}
+
+h2 {
+  font-family: var(--serif);
+  font-size: 51px;
+  line-height: 1.22;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.lede {
+  font-size: 22px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 48ch;
+  margin-bottom: 42px;
+}
+
+section { margin-bottom: 40px; }
+
+h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--green);
+  padding-top: 16px;
+  border-top: 2px solid var(--green-rule);
+  margin-bottom: 22px;
+}
+
+/* scope chips */
+.chips { display: flex; flex-wrap: wrap; gap: 13px; }
+.chips span {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--green);
+  background: var(--green-soft);
+  border: 1px solid var(--green-rule);
+  border-radius: 4px;
+  padding: 13px 26px;
+}
+
+/* benefits */
+.benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.benefits div {
+  border-left: 4px solid var(--green);
+  background: #f8faf8;
+  padding: 15px 20px;
+}
+.benefits b { display: block; font-size: 24px; margin-bottom: 5px; }
+.benefits span { font-size: 18px; color: var(--ink-soft); }
+
+/* steps */
+.steps { list-style: none; display: flex; gap: 14px; }
+.steps li {
+  flex: 1 1 0;
+  font-size: 19px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  border-top: 3px solid var(--green);
+  padding-top: 13px;
+}
+.steps li b {
+  display: block;
+  font-size: 20px;
+  color: var(--ink);
+  margin-bottom: 5px;
+}
+
+/* --------------------------------------------------------------- cta --- */
+.cta {
+  background: var(--green-soft);
+  border-top: 3px solid var(--green);
+  padding: 38px 78px 34px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.qr { width: 210px; height: 210px; display: block; flex: 0 0 auto; }
+.cta-text { flex: 1 1 auto; min-width: 0; }
+.cta-label {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+.url {
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 12px;
+  word-break: break-all;
+}
+.note { font-size: 20px; color: var(--ink-soft); }
+.fine {
+  font-size: 15px;
+  color: var(--ink-faint);
+  margin-top: 7px;
+}
+
+/* English variant: slightly wider measure, no CJK letter-spacing */
+.lang-en .lede { max-width: 54ch; }
+.lang-en h2 { font-size: 56px; }

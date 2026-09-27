@@ -46,13 +46,41 @@ Publish/
 │   │   └── papers.js       论文索引渲染
 │   └── data/papers.json    ★ 收录论文的数据
 │
+├── templates.html          论文模板页（导航栏「Templates」）
+├── templates/              ★ 供作者下载的论文模板
+│   ├── tdf-manuscript.docx  Word（学生最常用）
+│   ├── tdf-manuscript.tex   LaTeX
+│   └── tdf-manuscript.typ   Typst（免安装，浏览器可用）
+│
+├── posters/                ★ 征稿海报（HTML 源文件 + 渲染好的 PNG/PDF）
+│   ├── call-for-papers-zh.*   中文版
+│   ├── call-for-papers-en.*   英文版
+│   ├── poster.css             共用样式，改一处两个版本都变
+│   └── qr.svg / qr.png        指向本站的二维码
+│
 ├── .github/ISSUE_TEMPLATE/submission.yml   GitHub 投稿表单
 ├── docs/
 │   ├── supabase-setup.md   ★ 开启注册功能的完整步骤
 │   ├── review-form.md      评审意见表模板
 │   └── deploy.md           部署到 GitHub Pages
+├── tools/                  生成与回归脚本（见下）
 └── README.md
 ```
+
+## 常用脚本
+
+```powershell
+python tools\render_check.py       # 本地渲染全部页面 + 抓控制台错误 + 截图
+python tools\live_check.py         # 对线上站点做同样的事
+python tools\auth_check.py         # 验证登录/注册接线和导航布局
+python tools\e2e_check.py          # 端到端：注册 → 投稿 → 读取
+
+python tools\make_word_template.py # 重新生成 Word 模板
+python tools\make_qr.py            # 重新生成二维码
+python tools\render_poster.py      # 海报 HTML → PNG + PDF
+```
+
+> 跑需要联网的脚本前先设代理：`$env:HTTPS_PROXY = "http://127.0.0.1:7890"`
 
 ---
 
