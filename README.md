@@ -59,7 +59,6 @@ Publish/
 │   └── qr.svg / qr.png        指向本站的二维码
 │
 ├── .github/ISSUE_TEMPLATE/submission.yml   GitHub 投稿表单
-├── supabase/functions/notify-submission/   投稿邮件提醒的 Edge Function
 ├── docs/
 │   ├── supabase-setup.md   ★ 开启注册功能的完整步骤
 │   ├── submission-alerts.md ★ 配好投稿邮件提醒（不配就收不到通知）
@@ -76,6 +75,8 @@ python tools\render_check.py       # 本地渲染全部页面 + 抓控制台错�
 python tools\live_check.py         # 对线上站点做同样的事
 python tools\auth_check.py         # 验证登录/注册接线和导航布局
 python tools\e2e_check.py          # 端到端：注册 → 投稿 → 读取
+
+python tools\check_submissions.py  # 检查新投稿并发邮件提醒（见 docs/submission-alerts.md）
 
 python tools\make_word_template.py # 重新生成 Word 模板
 python tools\make_qr.py            # 重新生成二维码

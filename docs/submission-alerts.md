@@ -1,166 +1,203 @@
-# 投稿邮件提醒
+# 投稿邮件提醒（GitHub Actions 版）
 
 **没有这个，你收不到任何通知。** 在线表单投稿是直接写进 Supabase 数据库的，
 不配置的话你不主动去后台看，就不知道有人投稿了 —— 而我们对外承诺"初筛 3 个工作日"。
 
-配好之后的效果：**每收到一篇投稿，你的 163 邮箱立刻收到一封邮件**，里面带标题、
-作者、单位、通信邮箱、摘要和稿件链接。
+**效果**：每收到一篇投稿，**10 分钟内**你的 163 邮箱收到一封邮件，带标题、作者、
+单位、通信邮箱、摘要和稿件链接。
 
 ---
 
-## 原理（一句话）
+## 为什么用这个方案而不是 Supabase 的 Webhook
 
-```
-作者提交 → 写进 Supabase 的 submissions 表
-              ↓（数据库触发器）
-       调用 notify-submission 这个函数
-              ↓
-        用你的 163 邮箱发一封邮件给你自己
-```
+Supabase 的界面改过很多轮，"Database Webhooks" 在不同版本里位置不一样（有的在
+`Database → Webhooks`，有的挪到了 `Integrations → Webhooks`），免费版能不能用也
+不一定。
 
-投稿人的信息只经过**你自己的邮箱**，不经过任何第三方服务。
+**这个方案只依赖三样已经验证过能用的东西：**
 
----
-
-## 第 1 步：拿到 163 的 SMTP 授权码
-
-⚠️ **授权码不是你的登录密码**，是专门给程序用的一串字符。
-
-1. 浏览器登录 <https://mail.163.com>
-2. 顶部 **设置** → **POP3/SMTP/IMAP**
-3. 找到 **SMTP服务**，点 **开启**
-4. 按提示用手机发一条短信验证
-5. 验证通过后会给你一串**授权码**（形如 `ABCDEFGHIJKLMNOP`）
-
-**把这串码复制下来**，下一步要用。它只显示一次，关掉页面就看不到了
-（看不到可以重新生成一个）。
-
----
-
-## 第 2 步：在 Supabase 建函数
-
-1. 打开你的 Supabase 项目 → 左侧 **Edge Functions**
-2. 点 **Create a new function**（或 Deploy a new function）
-3. 名字填：`notify-submission`
-4. 把仓库里 `supabase/functions/notify-submission/index.ts` 的**全部内容**粘贴进去
-5. 点 **Deploy**
-
-> 如果你看到 "Deploy via CLI" 的提示，找找页面上有没有 **Via Editor** / 浏览器内编辑的入口。
-> Supabase 一直在改界面，**能用浏览器编辑就别装 CLI**。
-
----
-
-## 第 3 步：填配置（Secrets）
-
-在 **Edge Functions → Secrets**（有的版本在 Project Settings → Edge Functions）：
-
-| 名称 | 填什么 | 必填 |
-|---|---|---|
-| `MAIL_USER` | `18755246110@163.com` | ✅ |
-| `MAIL_PASS` | 第 1 步拿到的**授权码** | ✅ |
-| `MAIL_TO` | `18755246110@163.com`（不填就发给自己） | 可选 |
-| `SITE_URL` | `https://yangran12.github.io/YRpublish` | 可选 |
-| `HOOK_SECRET` | 随便编一串随机字符，比如 `tdf-hook-8f3k2m9x` | 建议填 |
-
-⚠️ **`MAIL_PASS` 一定填授权码，不要填登录密码** —— 填错了会一直报认证失败。
-
-填完**重新 Deploy 一次函数**，Secrets 才会生效。
-
----
-
-## 第 4 步：建数据库触发器
-
-左侧 **Database** → **Webhooks** → **Create a new hook**
-
-| 字段 | 填什么 |
+| 用到的东西 | 状态 |
 |---|---|
-| Name | `notify-submission` |
-| Table | `submissions` |
-| Events | 只勾 **Insert** |
-| Type | **Supabase Edge Function** |
-| Edge Function | `notify-submission` |
-| Method | `POST` |
-| HTTP Headers | `x-tdf-secret` : 你在第 3 步填的那串 |
+| GitHub 仓库 + Actions | ✅ 已经在用 |
+| Python 标准库（urllib / smtplib） | ✅ 脚本已验证 |
+| 你的 163 SMTP 授权码 | ✅ 已验证登录成功 |
 
-点 **Create webhook**。
+**完全不碰 Supabase 的界面功能**，只用它的 REST 接口。
 
 ---
 
-## 第 5 步：测试
+## 原理
 
-用你自己的账号在网站上走一遍投稿：<https://yangran12.github.io/YRpublish/submit.html>
+```
+GitHub Actions 每 10 分钟跑一次
+        ↓
+查 Supabase：有没有 notified_at 还是空的投稿？
+        ↓  有
+用你的 163 邮箱发一封邮件给自己
+        ↓  发信成功
+把这条记录的 notified_at 打上时间戳
+        ↓
+下次就不会重复发了
+```
 
-**1 分钟内**你的 163 邮箱应该收到邮件。
-
-没收到就往下看。
-
----
-
-## 没收到？按顺序排查
-
-### ① 先看函数日志
-
-Supabase → **Edge Functions** → `notify-submission` → **Logs**
-
-那里会打印具体错误。对着下表看：
-
-| 日志里的错误 | 原因 | 怎么办 |
-|---|---|---|
-| `535 Authentication failed` | 授权码填错，或 Secrets 没生效 | 回第 1 步重新生成授权码；改完 Secret 后**重新 Deploy** |
-| `Connection refused` / `timeout` | **163 拒绝了海外服务器的连接** | 见下方「换发信邮箱」 |
-| `getaddrinfo ENOTFOUND` | `MAIL_HOST` 拼错 | 应该是 `smtp.163.com` |
-| 日志里什么都没有 | Webhook 没触发 | 回第 4 步检查 Table 是不是 `submissions`、Events 是不是 `Insert` |
-| `bad secret` | 两边 secret 不一致 | Webhook 里的 header 和 Secret 必须一模一样 |
-
-### ② 换发信邮箱（如果 163 拒了海外连接）
-
-**这是最可能遇到的问题** —— 163 对境外 IP 的 SMTP 连接管得比较严，而
-Supabase 的服务器在境外。
-
-换一个邮件服务商就行，**只改 Secret，代码一个字不用动**：
-
-| 邮箱 | `MAIL_HOST` | `MAIL_PORT` | 备注 |
-|---|---|---|---|
-| QQ 邮箱 | `smtp.qq.com` | `465` | 同样要开 SMTP 并拿授权码 |
-| Outlook / Hotmail | `smtp-mail.outlook.com` | `587` | 用应用密码；587 需要把代码里 `tls: true` 改一下 |
-| Gmail | `smtp.gmail.com` | `465` | 用应用专用密码；国内访问不稳定 |
-
-**建议先试 QQ 邮箱** —— 同样在国内、同样免费、对境外连接比 163 宽松一些。
-把 `MAIL_USER` 换成 QQ 地址、`MAIL_PASS` 换成 QQ 的授权码、`MAIL_HOST` 改成
-`smtp.qq.com`，重新 Deploy 即可。**收件地址 `MAIL_TO` 仍然可以是你的 163。**
-
-### ③ 检查 163 的发信限额
-
-163 免费邮箱每日发信有上限（约 200 封）。我们这个场景一学期也就几十封，
-远够用。但如果日志提示超限，等第二天。
+**关键设计**：只有**发信成功**才打时间戳。如果发信失败，这条记录会被下一轮
+重新捡起来重发 —— 所以**不会漏，也不会重复**。
 
 ---
 
-## 几个要知道的限制
+## 第 1 步：给数据库加一列（1 分钟）
 
-- **Webhook 没有重试机制。** 发信失败就丢了。所以**函数里发信失败会返回 500
-  并在日志里留记录** —— 偶尔去 Logs 看一眼，别完全不管。
-- **邮件不是投稿成功的必要条件。** 投稿**已经存进数据库**了，邮件只是提醒。所以
-  即使邮件挂了，稿件也不会丢，你手动去 Supabase 后台照样能看到。
-- **想知道有没有漏的投稿**：Supabase → **Table Editor** → `submissions`，
-  按 `created_at` 倒序就是最新的。
-
----
-
-## 如果你不想配這一套
-
-那至少做到这一点：**每隔一两天登录 Supabase 后台看一眼 Table Editor**。
-
-不要既不配提醒、又不看后台 —— 那等于对外承诺了"3 个工作日初筛"，实际上没人看。
-
----
-
-## 附：留一份"手动检查"的底线方案
+Supabase → **SQL Editor** → New query → 粘贴 → **Run**：
 
 ```sql
--- 在 Supabase SQL Editor 里跑，看最近 30 天的投稿
-select created_at, title, authors, contact_email, status
+alter table public.submissions
+  add column if not exists notified_at timestamptz;
+
+comment on column public.submissions.notified_at is
+  'Set by tools/check_submissions.py once the alert email has gone out.';
+```
+
+这一列就是"有没有通知过"的标记。**不加这一列，脚本会报错。**
+
+---
+
+## 第 2 步：拿到 service_role key
+
+Supabase → **Project Settings** → **API** → 找到 **`service_role`** 那个 key
+（不是 `anon`）→ 复制。
+
+> ⚠️ **`service_role` key 是数据库的主钥匙**，能读写所有数据、绕过所有权限限制。
+> 它**只能放进 GitHub Secrets**，绝对不能出现在任何文件里、也不能发给任何人。
+>
+> 这和 `anon` key 完全不同 —— `anon` 是设计成公开的，`service_role` 不是。
+
+---
+
+## 第 3 步：填 GitHub Secrets（5 分钟）
+
+打开 <https://github.com/yangran12/YRpublish/settings/secrets/actions>
+
+点 **New repository secret**，一个一个加：
+
+| Name | Secret 值 |
+|---|---|
+| `SUPABASE_URL` | `https://eaueuxvizikfepbfponj.supabase.co` |
+| `SUPABASE_SERVICE_KEY` | 第 2 步复制的 `service_role` key |
+| `MAIL_USER` | `18755246110@163.com` |
+| `MAIL_PASS` | 你的 163 **授权码**（不是登录密码） |
+| `MAIL_TO` | `18755246110@163.com` |
+| `MAIL_HOST` | `smtp.163.com` |
+| `SITE_URL` | `https://yangran12.github.io/YRpublish` |
+
+`MAIL_PORT` 不用填，默认 465。
+
+---
+
+## 第 4 步：跑一次
+
+1. 打开 <https://github.com/yangran12/YRpublish/actions>
+2. 左边选 **Submission alerts**
+3. 右边点 **Run workflow** → **Run workflow**
+4. 等约 20 秒，点进这次运行看日志
+
+**日志里会直接告诉你结果：**
+
+| 日志 | 含义 |
+|---|---|
+| `no new submissions` | 一切正常，只是现在还没人投 |
+| `1 new submission(s)` + `mailed ...` | ✅ 成功，去查你 163 收件箱 |
+| `FAILED ...` | 见下面的排查表 |
+
+---
+
+## 第 5 步：真投一篇试试
+
+自己走一遍：<https://yangran12.github.io/YRpublish/submit.html>
+
+10 分钟内收邮件。
+
+> 想立刻看到效果，投完手动点一次 **Run workflow** 就行，不用等。
+
+---
+
+## 没收到？看这里
+
+先看 **Actions 运行日志里的报错**，对着下表：
+
+| 报错 | 原因 | 怎么办 |
+|---|---|---|
+| `535 Authentication failed` | 授权码错 | 重新生成 163 授权码，更新 `MAIL_PASS` |
+| `timeout` / `Connection refused` / `Network is unreachable` | **163 拒绝了 GitHub 服务器的连接**（境外 IP） | 见下方「换发信邮箱」 |
+| `HTTP 401: Invalid API key` | `service_role` key 填错 | 回第 2 步重新复制 |
+| `column ... notified_at does not exist` | 第 1 步的 SQL 没跑 | 回第 1 步 |
+| 日志空白 / 工作流没跑 | Actions 被禁用 | 见下方「60 天限制」 |
+
+### 换发信邮箱（如果 163 拒了境外连接）
+
+**这是最可能遇到的问题。** 163 对境外 IP 管得严，而 GitHub 的服务器在境外。
+
+换 QQ 邮箱最省事 —— **只改 3 个 Secret，代码一个字不动**：
+
+| Secret | 改成 |
+|---|---|
+| `MAIL_HOST` | `smtp.qq.com` |
+| `MAIL_USER` | 你的QQ号@qq.com |
+| `MAIL_PASS` | QQ邮箱的授权码（设置 → 账户 → POP3/SMTP → 生成授权码） |
+
+**`MAIL_TO` 保持 `18755246110@163.com` 不变** —— 提醒照样发到你 163。
+
+### ⚠️ 60 天限制（重要）
+
+**GitHub 会在仓库连续 60 天没有提交时，自动停掉定时任务。**
+
+你的仓库平时不怎么提交，所以这条**一定会触发**。停掉之后**不会有任何提示**，
+提醒就悄悄失效了。
+
+**两个应对办法：**
+
+1. **手动跑** —— 投稿量不大的阶段最实用：
+   去 <https://github.com/yangran12/YRpublish/actions> 点一次 **Run workflow**。
+   比如每周一点一次，就补上了。
+2. **定期推一次代码** —— 随便改个文件推上去，60 天计时就重置了。
+
+> 我会在下面附一个「手动检查」的本地脚本，双保险。
+
+---
+
+## 本地手动跑（不依赖 GitHub，双保险）
+
+同样的脚本，在你电脑上直接跑：
+
+```powershell
+$env:SUPABASE_URL           = "https://eaueuxvizikfepbfponj.supabase.co"
+$env:SUPABASE_SERVICE_KEY   = "你的 service_role key"
+$env:MAIL_USER              = "18755246110@163.com"
+$env:MAIL_PASS              = "你的授权码"
+$env:MAIL_TO                = "18755246110@163.com"
+
+python tools\check_submissions.py
+```
+
+想先看看会发什么、不真发：
+
+```powershell
+$env:DRY_RUN = "1"
+python tools\check_submissions.py
+```
+
+---
+
+## 最后兜底：直接看数据库
+
+无论邮件通不通，**投稿都已经存进数据库了，不会丢**。
+
+Supabase → **SQL Editor**：
+
+```sql
+select created_at, title, authors, contact_email, status, notified_at
 from public.submissions
 order by created_at desc
 limit 50;
 ```
+
+`notified_at` 是空的 = 那篇还没通知过。
