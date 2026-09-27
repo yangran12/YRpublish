@@ -12,7 +12,11 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT_DIR = ROOT / "posters"
-URL = "https://yangran12.github.io/YRpublish/"
+
+# The QR on the poster says "扫码投稿", so it lands on the submission page
+# itself rather than the home page. Change back to the bare site root if you
+# would rather people read what TDF is before they land on a form.
+URL = "https://yangran12.github.io/YRpublish/submit.html"
 
 
 def main():

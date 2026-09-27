@@ -10,7 +10,7 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 POSTERS = ROOT / "posters"
-EXPECTED = "https://yangran12.github.io/YRpublish/"
+EXPECTED = "https://yangran12.github.io/YRpublish/submit.html"
 
 TARGETS = [
     POSTERS / "qr.png",

@@ -59,8 +59,10 @@ Publish/
 │   └── qr.svg / qr.png        指向本站的二维码
 │
 ├── .github/ISSUE_TEMPLATE/submission.yml   GitHub 投稿表单
+├── supabase/functions/notify-submission/   投稿邮件提醒的 Edge Function
 ├── docs/
 │   ├── supabase-setup.md   ★ 开启注册功能的完整步骤
+│   ├── submission-alerts.md ★ 配好投稿邮件提醒（不配就收不到通知）
 │   ├── review-form.md      评审意见表模板
 │   └── deploy.md           部署到 GitHub Pages
 ├── tools/                  生成与回归脚本（见下）
