@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in — Transactions on Decarbonization Frontiers</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314532d'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' font-weight='bold' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main id="main">
+
+  <section class="section-sm" style="padding-top:44px">
+    <div class="wrap" style="max-width:560px">
+
+      <h1 data-i18n="auth.signin">Sign in</h1>
+
+      <div class="msg" id="auth-disabled" hidden></div>
+      <div class="msg" id="auth-msg" hidden></div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" data-tab="signin" aria-selected="true"
+                data-i18n="auth.tab.signin">Sign in</button>
+        <button class="tab" role="tab" data-tab="signup" aria-selected="false"
+                data-i18n="auth.tab.signup">Register</button>
+      </div>
+
+      <!-- ---------------------------------------------------- sign in -- -->
+      <div id="panel-signin" class="tabpanel" role="tabpanel">
+        <form class="form" id="signin-form" novalidate>
+          <div class="field">
+            <label for="in-email" data-i18n="common.email">Email address</label>
+            <input type="email" id="in-email" autocomplete="email"
+                   data-i18n-placeholder="auth.email_ph">
+          </div>
+          <div class="field">
+            <label for="in-password" data-i18n="common.password">Password</label>
+            <input type="password" id="in-password" autocomplete="current-password">
+          </div>
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary" data-i18n="auth.signin">Sign in</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ---------------------------------------------------- register -- -->
+      <div id="panel-signup" class="tabpanel" role="tabpanel" hidden>
+        <form class="form" id="signup-form" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="up-name" data-i18n="auth.name">Your name</label>
+              <input type="text" id="up-name" autocomplete="name"
+                     data-i18n-placeholder="auth.name_ph">
+            </div>
+            <div class="field">
+              <label for="up-affil" data-i18n="auth.affil">Institution</label>
+              <input type="text" id="up-affil" autocomplete="organization">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="up-role" data-i18n="auth.role">You are</label>
+            <select id="up-role">
+              <option value="student"  data-i18n="auth.role.student">Student</option>
+              <option value="faculty"  data-i18n="auth.role.faculty">Faculty</option>
+              <option value="reviewer" data-i18n="auth.role.reviewer">Reviewer</option>
+              <option value="other"    data-i18n="auth.role.other">Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="up-email" data-i18n="common.email">Email address</label>
+            <input type="email" id="up-email" autocomplete="email"
+                   data-i18n-placeholder="auth.email_ph">
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="up-password" data-i18n="common.password">Password</label>
+              <input type="password" id="up-password" autocomplete="new-password"
+                     data-i18n-placeholder="auth.password_ph">
+            </div>
+            <div class="field">
+              <label for="up-password2" data-i18n="auth.password2">Confirm password</label>
+              <input type="password" id="up-password2" autocomplete="new-password">
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary" data-i18n="auth.signup">Create account</button>
+          </div>
+
+          <p class="form-note">
+            <span data-i18n="footer.about">TDF is a student-run open review platform. It is not a registered journal and makes no claim to be one. No fees are charged to authors or readers.</span>
+          </p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/login.js"></script>
+
+</body>
+</html>

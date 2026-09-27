@@ -1,0 +1,11 @@
+# Normalise line endings so Windows checkouts don't churn the whole repo.
+* text=auto eol=lf
+
+*.png  binary
+*.jpg  binary
+*.ico  binary
+*.pdf  binary
+
+# Keep these exactly as written — they are read by tools, not by the browser.
+.gitattributes  text eol=lf
+.nojekyll       text eol=lf

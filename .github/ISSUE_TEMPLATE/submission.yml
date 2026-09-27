@@ -1,0 +1,99 @@
+name: 投稿 / Manuscript submission
+description: 提交稿件，或对已有稿件提交评审意见 / Submit a manuscript, or file a review report
+title: "[Submission] "
+labels: ["submission"]
+body:
+
+  - type: markdown
+    attributes:
+      value: |
+        感谢投稿。填写此表单后你会得到一个公开的 Issue 编号 —— **这个编号就是这篇稿件在整个评审过程中的公开记录**。
+        编辑部的初筛结果、评审意见、作者答复都会在这个 Issue 下进行。
+
+        Thank you for submitting. This issue number becomes the **public record** for your
+        manuscript: screening notes, reviewer reports and author responses all happen below.
+
+        > 提交前请确认：稿件未一稿多投；全部作者同意公开评审。
+        > Before submitting: the manuscript is not under consideration elsewhere, and all
+        > authors have agreed to open review.
+
+  - type: input
+    id: manuscript_title
+    attributes:
+      label: 论文标题 / Manuscript title
+    validations:
+      required: true
+
+  - type: input
+    id: authors
+    attributes:
+      label: 作者 / Authors
+      description: 按署名顺序，用逗号分隔 / In order, comma-separated
+      placeholder: 张三，李四，王五
+    validations:
+      required: true
+
+  - type: input
+    id: affiliation
+    attributes:
+      label: 作者单位 / Affiliation
+    validations:
+      required: true
+
+  - type: input
+    id: contact
+    attributes:
+      label: 通信作者邮箱 / Corresponding author email
+      placeholder: you@example.com
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: 方向 / Subject area
+      options:
+        - 电动汽车 Electric mobility
+        - 可再生能源 Renewable energy
+        - 智慧电网 Smart grids
+        - 能源系统中的人工智能 AI in energy systems
+        - 交叉 / 其他 Interdisciplinary / other
+    validations:
+      required: true
+
+  - type: textarea
+    id: abstract
+    attributes:
+      label: 摘要 / Abstract
+      description: 150–250 词 / 150–250 words
+    validations:
+      required: true
+
+  - type: input
+    id: keywords
+    attributes:
+      label: 关键词 / Keywords
+      placeholder: 电动汽车；智慧电网；低碳调度
+    validations:
+      required: false
+
+  - type: input
+    id: manuscript_link
+    attributes:
+      label: 稿件链接 / Manuscript link
+      description: Zenodo、OSF 或网盘链接，建议 PDF / Zenodo, OSF or a shared link. PDF preferred.
+      placeholder: https://zenodo.org/records/…
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: declarations
+    attributes:
+      label: 声明 / Declarations
+      options:
+        - label: 本文未在其他刊物投稿或审稿中。/ This work is not under consideration elsewhere.
+          required: true
+        - label: 全部作者同意投稿，并同意评审过程公开。/ All authors agree to submission and to open review.
+          required: true
+        - label: 我愿意将预印本存交至 Zenodo。/ I am willing to deposit the preprint on Zenodo.
+          required: false

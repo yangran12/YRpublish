@@ -1,0 +1,16 @@
+{
+  "_readme": [
+    "The index of accepted papers. Add one object to the 'papers' array per indexed paper.",
+    "Order does not matter — the page sorts newest first by date.",
+    "Fields:",
+    "  no      TDF number, e.g. \"TDF-2026-01\"  (required)",
+    "  title   Full title                          (required)",
+    "  authors Comma-separated author names        (required)",
+    "  date    ISO date, e.g. \"2026-09-27\"        (required)",
+    "  doi     Bare DOI, e.g. \"10.5281/zenodo.1234567\" (optional)",
+    "  review  URL of the public review thread      (optional)",
+    "Do not add trailing commas — this must stay valid JSON."
+  ],
+
+  "papers": []
+}

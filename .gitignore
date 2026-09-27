@@ -1,0 +1,10 @@
+﻿# Local preview artefacts
+shots/
+__pycache__/
+*.pyc
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

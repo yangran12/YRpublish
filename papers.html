@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Papers — Transactions on Decarbonization Frontiers</title>
+<meta name="description" content="Indexed papers that have completed open review at TDF.">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314532d'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' font-weight='bold' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main id="main">
+
+  <section class="section-sm" style="padding-top:44px">
+    <div class="wrap">
+      <h1 data-i18n="papers.title">Indexed papers</h1>
+      <p class="lede" data-i18n="papers.lede">
+        Every paper listed here has completed open review. Each links to its archived copy
+        and DOI.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-sm" style="padding-bottom:60px">
+    <div class="wrap">
+
+      <div class="table-wrap" id="papers-mount" hidden>
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="papers.th.no">No.</th>
+              <th data-i18n="papers.th.title">Title</th>
+              <th data-i18n="papers.th.date">Date</th>
+              <th data-i18n="papers.th.doi">DOI</th>
+              <th data-i18n="papers.th.review">Review</th>
+            </tr>
+          </thead>
+          <tbody><!-- filled by assets/js/papers.js --></tbody>
+        </table>
+      </div>
+
+      <div class="empty" id="papers-empty" hidden>
+        <p data-i18n="papers.empty">
+          No papers have been indexed yet. The first call for submissions is open.
+        </p>
+        <a class="btn btn-primary btn-sm" href="submit.html" data-i18n="submit.title">Submit a manuscript</a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/papers.js"></script>
+
+</body>
+</html>

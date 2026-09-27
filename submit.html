@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Submit — Transactions on Decarbonization Frontiers</title>
+<meta name="description" content="Submit a manuscript to TDF. No submission fee, no article processing charge.">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314532d'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' font-weight='bold' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main id="main">
+
+  <section class="section-sm" style="padding-top:44px">
+    <div class="wrap">
+      <h1 data-i18n="submit.title">Submit a manuscript</h1>
+      <p class="lede" data-i18n="submit.lede">
+        Two ways in. If you have an account, use the form — it keeps your submission history
+        in one place. Otherwise, email the editorial office.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-sm" style="padding-bottom:60px">
+    <div class="wrap">
+
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" data-tab="form" aria-selected="true"
+                data-i18n="submit.tab.form">Online form</button>
+        <button class="tab" role="tab" data-tab="email" aria-selected="false"
+                data-i18n="submit.tab.email">By email</button>
+      </div>
+
+      <!-- ------------------------------------------------------ form tab -- -->
+      <div id="panel-form" class="tabpanel" role="tabpanel">
+
+        <div class="msg" id="submit-notice" hidden></div>
+
+        <h2 style="margin-top:0" data-i18n="submit.before.heading">Before you submit</h2>
+        <ul class="plain small muted" style="max-width:62ch">
+          <li data-i18n="submit.before.1">The manuscript is not under consideration elsewhere.</li>
+          <li data-i18n="submit.before.2">All authors have agreed to the submission and to open review.</li>
+          <li data-i18n="submit.before.3">You are willing to deposit the preprint on Zenodo (we will walk you through it).</li>
+        </ul>
+
+        <hr>
+
+        <form class="form" id="submit-form" novalidate>
+
+          <div class="msg" id="submit-msg" hidden></div>
+
+          <div class="field">
+            <label for="f-title" data-i18n="submit.f.title">Manuscript title</label>
+            <input type="text" id="f-title" name="title"
+                   data-i18n-placeholder="submit.f.title_ph">
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="f-authors" data-i18n="submit.f.authors">Authors</label>
+              <input type="text" id="f-authors" name="authors"
+                     data-i18n-placeholder="submit.f.authors_ph">
+            </div>
+            <div class="field">
+              <label for="f-affil" data-i18n="submit.f.affil">Affiliation</label>
+              <input type="text" id="f-affil" name="affiliation"
+                     data-i18n-placeholder="submit.f.affil_ph">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-email" data-i18n="submit.f.email">Corresponding author email</label>
+            <input type="email" id="f-email" name="email" data-i18n-placeholder="auth.email_ph">
+          </div>
+
+          <div class="field">
+            <label for="f-abstract" data-i18n="submit.f.abstract">Abstract</label>
+            <textarea id="f-abstract" name="abstract"
+                      data-i18n-placeholder="submit.f.abstract_ph"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="f-keywords" data-i18n="submit.f.keywords">Keywords</label>
+            <input type="text" id="f-keywords" name="keywords"
+                   data-i18n-placeholder="submit.f.keywords_ph">
+          </div>
+
+          <div class="field">
+            <label for="f-link">
+              <span data-i18n="submit.f.link">Manuscript link</span>
+              <span class="hint" data-i18n="submit.f.link_hint">Zenodo, OSF, or a shared drive link. PDF preferred.</span>
+            </label>
+            <input type="url" id="f-link" name="file_url"
+                   data-i18n-placeholder="submit.f.link_ph">
+          </div>
+
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary" id="submit-btn"
+                    data-i18n="submit.f.submit">Submit manuscript</button>
+          </div>
+
+          <p class="form-note">
+            <span data-i18n="footer.licenseText">Papers are published under CC BY 4.0 unless stated otherwise.</span>
+          </p>
+
+        </form>
+      </div>
+
+      <!-- ----------------------------------------------------- email tab -- -->
+      <div id="panel-email" class="tabpanel" role="tabpanel" hidden>
+        <h2 style="margin-top:0" data-i18n="submit.email.heading">Submitting by email</h2>
+        <p class="lede" data-i18n="submit.email.body">
+          Send the manuscript as a PDF attachment, with a short covering message giving the
+          title, authors, affiliations and a contact address.
+        </p>
+        <p>
+          <a class="btn btn-primary" id="email-link" href="mailto:">
+            <span id="email-addr">tdf.editorial@example.com</span>
+          </a>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/submit.js"></script>
+
+</body>
+</html>

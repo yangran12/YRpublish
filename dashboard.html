@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My submissions — Transactions on Decarbonization Frontiers</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314532d'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' font-weight='bold' fill='white' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main id="main">
+
+  <section class="section-sm" style="padding-top:44px">
+    <div class="wrap">
+
+      <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:baseline;justify-content:space-between">
+        <div>
+          <h1 style="margin-bottom:.2em" data-i18n="dash.title">My submissions</h1>
+          <p class="small muted" style="margin:0">
+            <span data-i18n="dash.signedInAs">Signed in as</span>
+            <strong id="dash-who">—</strong>
+          </p>
+        </div>
+        <a class="btn btn-primary" href="submit.html" data-i18n="dash.new">Submit a manuscript</a>
+      </div>
+
+      <div class="msg" id="dash-msg" hidden style="margin-top:24px"></div>
+
+      <div class="table-wrap" id="dash-mount" hidden style="margin-top:28px">
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="dash.th.title">Title</th>
+              <th data-i18n="dash.th.status">Status</th>
+              <th data-i18n="dash.th.date">Submitted</th>
+            </tr>
+          </thead>
+          <tbody><!-- filled by assets/js/dashboard.js --></tbody>
+        </table>
+      </div>
+
+      <div class="empty" id="dash-empty" hidden style="margin-top:28px">
+        <p data-i18n="dash.empty">You have not submitted anything yet.</p>
+        <a class="btn btn-primary btn-sm" href="submit.html" data-i18n="dash.new">Submit a manuscript</a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/dashboard.js"></script>
+
+</body>
+</html>
