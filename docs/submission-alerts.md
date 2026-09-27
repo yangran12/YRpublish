@@ -61,15 +61,45 @@ comment on column public.submissions.notified_at is
 
 ---
 
-## 第 2 步：拿到 service_role key
+## 第 2 步：拿到密钥（1 分钟）
 
-Supabase → **Project Settings** → **API** → 找到 **`service_role`** 那个 key
-（不是 `anon`）→ 复制。
+Supabase 改过密钥体系，你的界面可能是下面两种之一 —— **两种都能用。**
 
-> ⚠️ **`service_role` key 是数据库的主钥匙**，能读写所有数据、绕过所有权限限制。
-> 它**只能放进 GitHub Secrets**，绝对不能出现在任何文件里、也不能发给任何人。
->
-> 这和 `anon` key 完全不同 —— `anon` 是设计成公开的，`service_role` 不是。
+**路径**：Supabase 左侧最下面点 **⚙️ Project Settings** → **API Keys**
+
+### 情况 A：看到「Publishable and secret API keys」标签页
+
+1. 点进这个标签页
+2. 如果页面上有 **Create new API keys** 按钮 → 先点它
+   （会生成 publishable 和 secret 两个新 key，**旧的 key 依然有效**，不影响网站运行）
+3. 复制 **Secret key**，形如 `sb_secret_xxxxxxxx`
+
+> ⚠️ **新密钥只显示一次**，创建后立刻复制，关掉就看不到了（看不到就再建一个）。
+
+### 情况 B：只看到旧的 anon / service_role
+
+1. 找 **Legacy API Keys** 标签页（有些版本直接就在页面上）
+2. 复制 **`service_role`** 那个，形如 `eyJhbGciOi...`
+3. **不要复制 `anon`**
+
+### 怎么区分你拿到的是哪种
+
+| 样子 | 类型 |
+|---|---|
+| `eyJhbGciOi...` 很长一串 | 旧格式 `service_role` |
+| `sb_secret_...` | 新格式 secret key |
+
+**两种脚本都支持，不用管是哪一种。**
+
+### ⚠️ 千万别弄混（这一条最容易出事）
+
+| 密钥 | 能不能公开 |
+|---|---|
+| `anon` / `sb_publishable_...` | ✅ **本来就公开**，已经在网站代码里了 |
+| `service_role` / `sb_secret_...` | ❌ **机密**，只能贴进 GitHub Secrets |
+
+**复制的时候看清是哪个。** 抄错成 anon 的话脚本读不到数据（只能看到自己那条）；
+抄错方向更糟 —— 把 service_role 贴到公开地方，数据库就等于交出去了。
 
 ---
 

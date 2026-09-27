@@ -68,14 +68,35 @@ def check_config() -> None:
         die("missing environment variable(s): " + ", ".join(missing))
 
 
+def auth_headers() -> dict:
+    """
+    Build the auth headers for the key we were given.
+
+    Supabase has two key formats and they are not interchangeable:
+
+      * legacy service_role  — a JWT, starts with "eyJ". Goes in `apikey`
+        *and* in `Authorization: Bearer`.
+      * new secret key       — an opaque token, starts with "sb_secret_".
+        Goes in `apikey` ONLY; sending it as a Bearer token gets it rejected
+        as an invalid JWT.
+
+    Accept either, so it does not matter which one the editor copied.
+    """
+    headers = {
+        "apikey": SERVICE_KEY,
+        "Content-Type": "application/json",
+        # A browser-like UA makes Supabase refuse a secret key. Be explicit.
+        "User-Agent": "tdf-submission-alerts/1.0",
+    }
+    if SERVICE_KEY.startswith("eyJ"):
+        headers["Authorization"] = f"Bearer {SERVICE_KEY}"
+    return headers
+
+
 def rest(method: str, path: str, body=None, prefer: str | None = None):
     """Call the Supabase REST API with the service key."""
     url = f"{SUPABASE_URL}/rest/v1/{path}"
-    headers = {
-        "apikey": SERVICE_KEY,
-        "Authorization": f"Bearer {SERVICE_KEY}",
-        "Content-Type": "application/json",
-    }
+    headers = auth_headers()
     if prefer:
         headers["Prefer"] = prefer
 
