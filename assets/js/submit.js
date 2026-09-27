@@ -11,7 +11,7 @@
   var msgEl   = document.getElementById("submit-msg");
   var btn     = document.getElementById("submit-btn");
 
-  var t = function (k) { return window.I18N.t(k); };
+  var t = function (k, vars) { return window.I18N.t(k, vars); };
   var show = window.TDF.message;
 
   /* ---------------------------------------------------------------- tabs -- */

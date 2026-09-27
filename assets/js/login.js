@@ -7,7 +7,7 @@
 
   var CFG = window.TDF_CONFIG || {};
   var AUTH = window.TDF_AUTH;
-  var t = function (k) { return window.I18N.t(k); };
+  var t = function (k, vars) { return window.I18N.t(k, vars); };
   var show = window.TDF.message;
 
   var signinForm = document.getElementById("signin-form");
